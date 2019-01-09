@@ -10,11 +10,11 @@ class Course(models.Model):
     description = fields.Text()
 
     responsable_id = fields.Many2one('openacademy.partner', string='Responsible')
-    session_ids = fields.One2many('openacademy.session', string='Sessions')
+    session_ids = fields.One2many('openacademy.session', 'course_id',
+        string='Sessions')
 
     level = fields.Selection([(1, 'Beginner'), (2, 'Confirmed'), (3, 'Gooroo')],
-        string='Difficulty Level')
-
+       string='Difficulty Level')
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -30,6 +30,6 @@ class Session(models.Model):
     duration = fields.Float(digits=(6, 2), help='Duration in days', default=1)
 
     course_id = fields.Many2one('openacademy.course', string='Course',
-        ondelete='cascade', required=True)
+       ondelete='cascade', required=True)
     instructor_id = fields.Many2one('openacademy.partner', string='Instructor')
     attendee_ids = fields.Many2many('openacademy.partner', string='Attendees')
