@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="partner_daenerys" model="datasample.partner">
+        <field name="firstname">Daenerys</field>
+        <field name="lastname">Targaryan</field>
+    </record>
+
+    <record id="partner_tyrion" model="datasample.partner">
+        <field name="firstname">Tyrion</field>
+        <field name="lastname">Lannister</field>
+    </record>
+
+    <record id="partner_arya" model="datasample.partner">
+        <field name="firstname">Arya</field>
+        <field name="lastname">Stark</field>
+    </record>
+
+    <record id="partner_chris" model="datasample.partner">
+        <field name="firstname">Chris</field>
+        <field name="lastname">Redfield</field>
+    </record>
+
+    <record id="partner_claire" model="datasample.partner">
+        <field name="firstname">Claire</field>
+        <field name="lastname">Redfield</field>
+    </record>
+
+    <record id="partner_leon" model="datasample.partner">
+        <field name="firstname">Leon</field>
+        <field name="lastname">Kennedy</field>
+    </record>
+
+    <record id="partner_ada" model="datasample.partner">
+        <field name="firstname">Ada</field>
+        <field name="lastname">Wong</field>
+    </record>
+
+    <record id="partner_wesker" model="datasample.partner">
+        <field name="firstname">Albert</field>
+        <field name="lastname">Wesker</field>
+    </record>
+
+    <record id="partner_jill" model="datasample.partner">
+        <field name="firstname">Jill</field>
+        <field name="lastname">Valentine</field>
+    </record>
+</odoo>

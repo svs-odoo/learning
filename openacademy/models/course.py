@@ -9,7 +9,7 @@ class Course(models.Model):
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
 
-    responsable_id = fields.Many2one('openacademy.partner', string='Responsible')
+    responsible_id = fields.Many2one('datasample.partner', string='Responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id',
         string='Sessions')
 
@@ -29,11 +29,14 @@ class Session(models.Model):
     start_date = fields.Date(default=fields.Date.context_today)
     end_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6, 2), help='Duration in days', default=1)
+    level = fields.Selection(related='course_id.level')
 
     course_id = fields.Many2one('openacademy.course', string='Course',
        ondelete='cascade', required=True)
-    instructor_id = fields.Many2one('openacademy.partner', string='Instructor')
-    attendee_ids = fields.Many2many('openacademy.partner', string='Attendees')
+    instructor_id = fields.Many2one('datasample.partner', string='Instructor')
+    responsible_id = fields.Many2one(related='course_id.responsible_id',
+        readonly=True, store=True)
+    attendee_ids = fields.Many2many('datasample.partner', string='Attendees')
     attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
 
     seats = fields.Integer()
@@ -66,14 +69,22 @@ class Session(models.Model):
 
     @api.depends('start_date', 'end_date')
     def _compute_duration(self):
-        # for session in self:
-        #     if not session
-        if not (self.start_date and self.end_date):
-            return
-        if self.end_date < self.start_date:
-            return {'warning': {
-                'title': 'Incorrect date value',
-                'message': 'End date is earlier then start date'
-            }}
-        delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
-        self.duration = delta.days + 1
+        for session in self:
+            if not (session.start_date and session.end_date):
+                return
+            if session.end_date < session.start_date:
+                return {'warning': {
+                    'title': 'Incorrect date value',
+                    'message': 'End date is earlier then start date'
+                }}
+            delta = fields.Date.from_string(session.end_date) - fields.Date.from_string(session.start_date)
+            session.duration = delta.days + 1
+        # if not (self.start_date and self.end_date):
+        #     return
+        # if self.end_date < self.start_date:
+        #     return {'warning': {
+        #         'title': 'Incorrect date value',
+        #         'message': 'End date is earlier then start date'
+        #     }}
+        # delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
+        # self.duration = delta.days + 1

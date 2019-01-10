@@ -14,6 +14,7 @@
                 <field name="taken_seats" widget="progressbar"/>
                 <field name="attendees_count"/>
             </tree>
+        </field>
     </record>
 
     <record id="session_view_form" model="ir.ui.view">
@@ -41,6 +42,7 @@
                     <field name="attendee_ids"/>
                 </sheet>
             </form>
+        </field>
     </record>
 
     <record id="session_action" model="ir.actions.act_window">

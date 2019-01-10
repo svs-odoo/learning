@@ -9,6 +9,7 @@
                 <field name="responsible_id"/>
                 <field name="level"/>
             </tree>
+        </field>
     </record>
 
     <record id="course_view_form" model="ir.ui.view">
@@ -32,6 +33,7 @@
                     </notebook>
                 </sheet>
             </form>
+        </field>
     </record>
 
     <record id="course_action" model="ir.actions.act_window">

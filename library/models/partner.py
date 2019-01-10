@@ -3,11 +3,9 @@
 from odoo import fields, models
 
 class Partner(models.Model):
-    _name = 'library.partner'
-    _description = 'Partner'
+    _inherit = 'datasample.partner'
+    _name = 'datasample.partner'
 
-    firstname = fields.Char(require=True)
-    lastname = fields.Char(require=True)
     email = fields.Text()
     address = fields.Text()
 
