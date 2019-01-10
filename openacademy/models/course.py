@@ -27,12 +27,14 @@ class Session(models.Model):
         string='Status', default='draft')
 
     start_date = fields.Date(default=fields.Date.context_today)
+    end_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6, 2), help='Duration in days', default=1)
 
     course_id = fields.Many2one('openacademy.course', string='Course',
        ondelete='cascade', required=True)
     instructor_id = fields.Many2one('openacademy.partner', string='Instructor')
     attendee_ids = fields.Many2many('openacademy.partner', string='Attendees')
+    attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
 
     seats = fields.Integer()
     taken_seats = fields.Integer(compute='_compute_taken_seats', store=True)
@@ -45,6 +47,11 @@ class Session(models.Model):
             else:
                 session.taken_seats = len(session.attendee_ids) / session.seats * 100
 
+    @api.depends('attendee_ids')
+    def _get_attendees_count(self):
+        for session in self:
+            session.attendees_count = len(session.attendee_ids)
+
     @api.onchange('seats', 'attendee_ids')
     def _check_taken_seats(self):
         for session in self:
@@ -56,3 +63,17 @@ class Session(models.Model):
                             self.seats, len(self.attendees)
                             )
                 }}
+
+    @api.depends('start_date', 'end_date')
+    def _compute_duration(self):
+        # for session in self:
+        #     if not session
+        if not (self.start_date and self.end_date):
+            return
+        if self.end_date < self.start_date:
+            return {'warning': {
+                'title': 'Incorrect date value',
+                'message': 'End date is earlier then start date'
+            }}
+        delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
+        self.duration = delta.days + 1

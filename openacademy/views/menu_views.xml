@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="root_menu"
+        name="Open Academy"
+    />
+    <menuitem
+        id="course_menu"
+        name="Courses"
+        parent="openacademy.root_menu"
+    />
+    <menuitem
+        id="course_menu_action"
+        name="Courses"
+        parent="openacademy.course_menu"
+        action="course_action"
+    />
+    <menuitem
+        id="session_menu_action"
+        name="Sessions"
+        parent="openacademy.course_menu"
+        action="session_action"
+    />
+</odoo>
