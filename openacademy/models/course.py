@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -33,3 +33,26 @@ class Session(models.Model):
        ondelete='cascade', required=True)
     instructor_id = fields.Many2one('openacademy.partner', string='Instructor')
     attendee_ids = fields.Many2many('openacademy.partner', string='Attendees')
+
+    seats = fields.Integer()
+    taken_seats = fields.Integer(compute='_compute_taken_seats', store=True)
+
+    @api.depends('seats', 'attendee_ids')
+    def _compute_taken_seats(self):
+        for session in self:
+            if not session.seats:
+                session.taken_seats = 0
+            else:
+                session.taken_seats = len(session.attendee_ids) / session.seats * 100
+
+    @api.onchange('seats', 'attendee_ids')
+    def _check_taken_seats(self):
+        for session in self:
+            if self.taken_seats > 100:
+                return {'warning': {
+                    'title': 'Too many attendees for this session !',
+                    'message':
+                        'This session has %s and have already %s attendees registred.' % (
+                            self.seats, len(self.attendees)
+                            )
+                }}
