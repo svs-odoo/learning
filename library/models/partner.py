@@ -9,7 +9,7 @@ class Partner(models.Model):
     firstname = fields.Char(require=True)
     lastname = fields.Char(require=True)
     email = fields.Text()
-    adress = fields.Text()
+    address = fields.Text()
 
     partner_type = fields.Selection([('customer', 'Customer'), ('author', 'Author')],
         default='customer')
