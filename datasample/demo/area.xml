@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="area_farm" model="datasample.area">
+        <field name="name">Farm</field>
+        <field name="description">The main place to dev and make BBQ !</field>
+    </record>
+
+    <record id="area_parking" model="datasample.area">
+        <field name="name">Parking</field>
+        <field name="description">Put your Odoo car here.</field>
+        <field name="parent_area_id" ref="datasample.area_farm"/>
+    </record>
+
+    <record id="area_office_a" model="datasample.area">
+        <field name="name">Office A</field>
+        <field name="description">It's office A, put plant the bomb in B.</field>
+        <field name="parent_area_id" ref="datasample.area_farm"/>
+    </record>
+
+    <record id="area_office_B" model="datasample.area">
+        <field name="name">Office B</field>
+        <field name="description">It's office B, put plant the bomb in A.</field>
+        <field name="parent_area_id" ref="datasample.area_farm"/>
+    </record>
+
+    <record id="area_private_toilet" model="datasample.area">
+        <field name="name">Toilet - Office B</field>
+        <field name="description">Office B has its own toilet, so lucky !</field>
+        <field name="parent_area_id" ref="datasample.area_office_B"/>
+    </record>
+
+    <record id="area_lunchroom" model="datasample.area">
+        <field name="name">Lunch Room</field>
+        <field name="description">Don't eat alone, go to lunch room.</field>
+        <field name="parent_area_id" ref="datasample.area_farm"/>
+    </record>
+</odoo>

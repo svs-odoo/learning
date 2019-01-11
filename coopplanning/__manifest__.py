@@ -16,12 +16,12 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base'],
+    'depends': ['base', 'datasample'],
 
     'data': [
         'security/ir.model.access.csv',
-        # 'views/views.xml',
-        # 'views/templates.xml',
+        'views/task_views.xml',
+        'views/menu_views.xml',
     ],
     'demo': [
         'demo/demo.xml',

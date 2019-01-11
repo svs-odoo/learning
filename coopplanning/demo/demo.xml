@@ -1,3 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!-- Day Numbers -->
+    <record id="day_0" model="coopplanning.daynumber">
+        <field name="name">Monday</field>
+        <field name="number">0</field>
+    </record>
+
+    <record id="day_1" model="coopplanning.daynumber">
+        <field name="name">Tuesday</field>
+        <field name="number">1</field>
+    </record>
+
+    <record id="day_2" model="coopplanning.daynumber">
+        <field name="name">Wednesday</field>
+        <field name="number">2</field>
+    </record>
+
+    <record id="day_3" model="coopplanning.daynumber">
+        <field name="name">Thursday</field>
+        <field name="number">3</field>
+    </record>
+
+    <record id="day_4" model="coopplanning.daynumber">
+        <field name="name">Friday</field>
+        <field name="number">4</field>
+    </record>
+<!-- Task Types -->
+    <record id="demo_task_type1" model="coopplanning.task.type">
+        <field name="name">Clean your desktop</field>
+        <field name="description">Keep your workspace safe and clean.</field>
+        <field name="area" ref="datasample.area_office_a"/>
+    </record>
+
+    <record id="demo_task_type2" model="coopplanning.task.type">
+        <field name="name">Run the dishwasher</field>
+        <field name="description">Start the dishwasher everyday.</field>
+        <field name="area" ref="datasample.area_lunchroom"/>
+    </record>
+
+    <record id="demo_task_type3" model="coopplanning.task.type">
+        <field name="name">Empty the dishwasher</field>
+        <field name="description">Empty the dishwasher and tidy dishes at the good palce.</field>
+        <field name="area" ref="datasample.area_lunchroom"/>
+    </record>
+
+    <record id="demo_task_type4" model="coopplanning.task.type">
+        <field name="name">Kill the Zombies</field>
+        <field name="description">Go around the Farm and kill zombies you'll find.&#10;Its important to keep the place safe because zombies like to eat developpers' brain.</field>
+        <field name="area" ref="datasample.area_farm"/>
+    </record>
+<!-- Task Templates -->
+    <record id="demo_task_template1" model="coopplanning.task.template">
+        <field name="name">Cleaning Routine - 1</field>
+        <field name="day_nb_id" ref="day_2"/>
+        <field name="task_type_id" ref="demo_task_type1"/>
+        <field name="worker_nb">3</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="demo_task_template2" model="coopplanning.task.template">
+        <field name="name">Cleaning Routine - 2</field>
+        <field name="day_nb_id" ref="day_4"/>
+        <field name="task_type_id" ref="demo_task_type1"/>
+        <field name="worker_nb">3</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="demo_task_template3" model="coopplanning.task.template">
+        <field name="name">Safe Routine : Clean the area - 1</field>
+        <field name="day_nb_id" ref="day_0"/>
+        <field name="task_type_id" ref="demo_task_type4"/>
+        <field name="worker_nb">5</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="demo_task_template4" model="coopplanning.task.template">
+        <field name="name">Safe Routine : Clean the area - 2</field>
+        <field name="day_nb_id" ref="day_2"/>
+        <field name="task_type_id" ref="demo_task_type4"/>
+        <field name="worker_nb">5</field>
+        <field name="active" eval="True"/>
+    </record>
+
+    <record id="demo_task_template5" model="coopplanning.task.template">
+        <field name="name">Safe Routine : Clean the area - 3</field>
+        <field name="day_nb_id" ref="day_4"/>
+        <field name="task_type_id" ref="demo_task_type4"/>
+        <field name="worker_nb">5</field>
+        <field name="active" eval="True"/>
+    </record>
+    <!-- Dishwasher Tasks -->
+        <record id="demo_task_template6" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : run - 1</field>
+            <field name="day_nb_id" ref="day_0"/>
+            <field name="task_type_id" ref="demo_task_type2"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template7" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : run - 2</field>
+            <field name="day_nb_id" ref="day_1"/>
+            <field name="task_type_id" ref="demo_task_type2"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template8" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : run - 3</field>
+            <field name="day_nb_id" ref="day_2"/>
+            <field name="task_type_id" ref="demo_task_type2"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template9" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : run - 4</field>
+            <field name="day_nb_id" ref="day_3"/>
+            <field name="task_type_id" ref="demo_task_type2"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template10" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : run - 5</field>
+            <field name="day_nb_id" ref="day_4"/>
+            <field name="task_type_id" ref="demo_task_type2"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template11" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : empty - 1</field>
+            <field name="day_nb_id" ref="day_0"/>
+            <field name="task_type_id" ref="demo_task_type3"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template12" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : empty - 2</field>
+            <field name="day_nb_id" ref="day_1"/>
+            <field name="task_type_id" ref="demo_task_type3"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template13" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : empty - 3</field>
+            <field name="day_nb_id" ref="day_2"/>
+            <field name="task_type_id" ref="demo_task_type3"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template14" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : empty - 4</field>
+            <field name="day_nb_id" ref="day_3"/>
+            <field name="task_type_id" ref="demo_task_type3"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="demo_task_template15" model="coopplanning.task.template">
+            <field name="name">Manage Dishwasher : empty - 5</field>
+            <field name="day_nb_id" ref="day_4"/>
+            <field name="task_type_id" ref="demo_task_type3"/>
+            <field name="worker_nb">1</field>
+            <field name="active" eval="True"/>
+        </record>
 </odoo>

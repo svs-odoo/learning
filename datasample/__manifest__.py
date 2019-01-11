@@ -11,7 +11,13 @@
     'version': "0.1",
     'depends': ['base'],
 
-    'demo': ['demo/partner.xml'],
+    'data': [
+        "security/ir.model.access.csv"
+    ],
+    'demo': [
+        'demo/partner.xml',
+        'demo/area.xml'
+    ],
     'installable': True,
     'application': False,
     'auto_install': True,

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_root"
+        name="Cooperative Planning"
+        web_icon="coopplanning,static/description/icon.png"
+    />
+
+    <menuitem
+        id="task_template_menu"
+        name="Task Template"
+        parent="coopplanning.menu_root"
+        action="task_template_action"
+    />
+
+    <menuitem
+        id="task_type_menu"
+        name="Task Type"
+        parent="coopplanning.menu_root"
+        action="task_type_action"
+    />
+</odoo>

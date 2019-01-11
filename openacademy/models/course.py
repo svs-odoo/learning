@@ -33,7 +33,7 @@ class Session(models.Model):
         string='Status', default='draft')
 
     start_date = fields.Date(default=fields.Date.context_today)
-    end_date = fields.Date(default=fields.Date.today)
+    end_date = fields.Date(default=fields.Date.context_today)
     duration = fields.Float(digits=(6, 2), help='Duration in days', default=1)
     level = fields.Selection(related='course_id.level')
 
@@ -81,7 +81,7 @@ class Session(models.Model):
             if session.end_date < session.start_date:
                 return {'warning': {
                     'title': 'Incorrect date value',
-                    'message': 'End date is earlier then start date'
+                    'message': 'End date is earlier than start date'
                 }}
             delta = fields.Date.from_string(session.end_date) - fields.Date.from_string(session.start_date)
             session.duration = delta.days + 1
