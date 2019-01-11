@@ -3,6 +3,7 @@
     <menuitem
         id="root_menu"
         name="Open Academy"
+        web_icon="openacademy,static/description/icon.png"
     />
     <menuitem
         id="course_menu"

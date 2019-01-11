@@ -15,6 +15,12 @@ class Course(models.Model):
 
     level = fields.Selection([(1, 'Beginner'), (2, 'Confirmed'), (3, 'Gooroo')],
        string='Difficulty Level')
+    session_count = fields.Integer(compute="_compute_session_count")
+
+    @api.depends('session_ids')
+    def _compute_session_count(self):
+        for course in self:
+            course.session_count = len(course.session_ids)
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -58,16 +64,16 @@ class Session(models.Model):
     @api.onchange('seats', 'attendee_ids')
     def _check_taken_seats(self):
         for session in self:
-            if self.taken_seats > 100:
+            if session.taken_seats > 100:
                 return {'warning': {
                     'title': 'Too many attendees for this session !',
                     'message':
                         'This session has %s and have already %s attendees registred.' % (
-                            self.seats, len(self.attendees)
+                            session.seats, len(session.attendee_ids)
                             )
                 }}
 
-    @api.depends('start_date', 'end_date')
+    @api.onchange('start_date', 'end_date')
     def _compute_duration(self):
         for session in self:
             if not (session.start_date and session.end_date):
