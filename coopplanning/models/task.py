@@ -43,7 +43,7 @@ class TaskTemplate(models.Model):
     duration = fields.Float(compute='_compute_duration', help="Duration in Hour", store=True)
 
     worker_nb = fields.Integer(default=1, required=True)
-    worker_ids = fields.Many2many('datasample.partner', string="Recurrent worker assigned")
+    worker_ids = fields.Many2many('res.partner', string="Recurrent worker assigned")
     active = fields.Boolean(default=True)
 
     task_area = fields.Many2one(related='task_type_id.area')
@@ -108,4 +108,4 @@ class Task(models.Model):
     start_time = fields.Datetime()
     end_time = fields.Datetime()
 
-    worker_id = fields.Many2one('datasample.partner')
+    worker_id = fields.Many2one('res.partner')

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="session_view_list" model="ir.ui.view">
-        <field name="name">openacademy.session.list</field>
+    <record id="session_view_tree" model="ir.ui.view">
+        <field name="name">openacademy.session.tree</field>
         <field name="model">openacademy.session</field>
         <field name="arch" type="xml">
             <tree>
@@ -28,7 +28,7 @@
                         <field name="course_id"/>
                         <field name="responsible_id"/>
                         <field name="level"/>
-                        <field name="instructor_id"/>
+                        <field name="instructor_id" domain="[('instructor', '=', True)]"/>
                         <field name="active"/>
                     </group>
                     <group>

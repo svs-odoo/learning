@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="course_view_list" model="ir.ui.view">
-        <field name="name">openacademy.course.list</field>
+    <record id="course_view_tree" model="ir.ui.view">
+        <field name="name">openacademy.course.tree</field>
         <field name="model">openacademy.course</field>
         <field name="arch" type="xml">
             <tree>

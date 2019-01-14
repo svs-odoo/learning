@@ -9,7 +9,7 @@ class Course(models.Model):
     name = fields.Char(string='Title', required=True)
     description = fields.Text()
 
-    responsible_id = fields.Many2one('datasample.partner', string='Responsible')
+    responsible_id = fields.Many2one('res.partner', string='Responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id',
         string='Sessions')
 
@@ -39,10 +39,10 @@ class Session(models.Model):
 
     course_id = fields.Many2one('openacademy.course', string='Course',
        ondelete='cascade', required=True)
-    instructor_id = fields.Many2one('datasample.partner', string='Instructor')
+    instructor_id = fields.Many2one('res.partner', string='Instructor')
     responsible_id = fields.Many2one(related='course_id.responsible_id',
         readonly=True, store=True)
-    attendee_ids = fields.Many2many('datasample.partner', string='Attendees')
+    attendee_ids = fields.Many2many('res.partner', string='Attendees')
     attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
 
     seats = fields.Integer()

@@ -22,4 +22,10 @@
         parent="openacademy.course_menu"
         action="session_action"
     />
+    <menuitem
+        id="partner_menu_action"
+        name="Contacts"
+        parent="openacademy.root_menu"
+        action="partner_action"
+    />
 </odoo>

@@ -9,4 +9,4 @@ class Area(models.Model):
     description = fields.Text()
     parent_area_id = fields.Many2one('datasample.area', string='Parent Area',
         ondelete='set null')
-    responsible = fields.Many2one('datasample.partner', string='Responsible')
+    responsible = fields.Many2one('res.partner', string='Responsible')

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="partner_daenerys" model="datasample.partner">
+    <record id="partner_daenerys" model="res.partner">
         <field name="name">Daenerys Targaryan</field>
         <field name="email">daenerys@targaryan.org</field>
         <field name="address">Top of the Pyramid, Mereen</field>
     </record>
 
-    <record id="partner_tyrion" model="datasample.partner">
+    <record id="partner_tyrion" model="res.partner">
         <field name="name">Tyrion Lannister</field>
         <field name="email">tyrion@lannister.org</field>
         <field name="address">Red keep, King's Landing</field>
     </record>
 
-    <record id="author_martin" model="datasample.partner">
+    <record id="author_martin" model="res.partner">
         <field name="firstname">George</field>
         <field name="lastname">R.R. Martin</field>
         <field name="email">george@got.org</field>
