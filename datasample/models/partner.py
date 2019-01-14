@@ -9,6 +9,9 @@ class Partner(models.Model):
     lastname = fields.Char(require=True)
     name = fields.Char(compute='_compute_name', store=True)
 
+    email = fields.Char()
+    phone = fields.Char()
+
     @api.depends('firstname', 'lastname')
     def _compute_name(self):
         for partner in self:

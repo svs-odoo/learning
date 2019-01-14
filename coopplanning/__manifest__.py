@@ -20,6 +20,7 @@
 
     'data': [
         'security/ir.model.access.csv',
+        'views/daynumber_views.xml',
         'views/task_views.xml',
         'views/menu_views.xml',
     ],

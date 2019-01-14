@@ -5,18 +5,43 @@
         name="Cooperative Planning"
         web_icon="coopplanning,static/description/icon.png"
     />
+<!-- Planning -->
+    <menuitem
+        id="task_menu"
+        name="Planning"
+        parent="coopplanning.menu_root"
+    />
+    <menuitem
+        id="task_menu_action"
+        name="Tasks"
+        parent="coopplanning.task_menu"
+        action="task_action"
+    />
 
     <menuitem
         id="task_template_menu"
-        name="Task Template"
-        parent="coopplanning.menu_root"
+        name="Task Templates"
+        parent="coopplanning.task_menu"
         action="task_template_action"
+    />
+<!-- Configuration -->
+    <menuitem
+        id="configuration_menu"
+        name="Configuration"
+        parent="coopplanning.menu_root"
     />
 
     <menuitem
         id="task_type_menu"
-        name="Task Type"
-        parent="coopplanning.menu_root"
+        name="Task Types"
+        parent="coopplanning.configuration_menu"
         action="task_type_action"
+    />
+
+    <menuitem
+        id="daynumber_menu"
+        name="Day Number"
+        parent="coopplanning.configuration_menu"
+        action="daynumber_action"
     />
 </odoo>

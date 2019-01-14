@@ -6,7 +6,6 @@ class Partner(models.Model):
     _inherit = 'datasample.partner'
     _name = 'datasample.partner'
 
-    email = fields.Text()
     address = fields.Text()
 
     partner_type = fields.Selection([('customer', 'Customer'), ('author', 'Author')],
