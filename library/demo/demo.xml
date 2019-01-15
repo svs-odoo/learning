@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="partner_daenerys" model="res.partner">
-        <field name="name">Daenerys Targaryan</field>
-        <field name="email">daenerys@targaryan.org</field>
-        <field name="address">Top of the Pyramid, Mereen</field>
-    </record>
-
-    <record id="partner_tyrion" model="res.partner">
-        <field name="name">Tyrion Lannister</field>
-        <field name="email">tyrion@lannister.org</field>
-        <field name="address">Red keep, King's Landing</field>
-    </record>
-
-    <record id="author_martin" model="res.partner">
-        <field name="firstname">George</field>
-        <field name="lastname">R.R. Martin</field>
-        <field name="email">george@got.org</field>
-        <field name="address">Bayonne, New Jersey, United States</field>
-        <field name="partner_type">author</field>
-    </record>
-
-    <record id="book_got" model="library.book">
-        <field name="name">Game of Thrones</field>
-        <field name="edition_date">1996-08-01</field>
-        <field name="isbn">0-553-10354-7</field>
-    </record>
-
+<!-- Publishers -->
     <record id="publisher_got" model="library.publisher">
         <field name="name">Bantam Spectra</field>
+    </record>
+    <record id="publisher_amazon" model="library.publisher">
+        <field name="name">Amazon</field>
+    </record>
+<!-- Authors -->
+    <record id="author_martin" model="res.partner">
+        <field name="name">George R.R. Martin</field>
+        <field name="email">george@got.org</field>
+        <field name="partner_type">author</field>
+    </record>
+    <record id="author_driscoll" model="res.partner">
+        <field name="name">Teresa Driscoll</field>
+        <field name="email">driscoll_teresa@writer.org</field>
+        <field name="partner_type">author</field>
+    </record>
+    <record id="author_arthur_cc" model="res.partner">
+        <field name="name">Arthur C. Clarke</field>
+        <field name="partner_type">author</field>
+    </record>
+    <record id="author_baxter" model="res.partner">
+        <field name="name">Stephen Baxter</field>
+        <field name="partner_type">author</field>
+    </record>
+<!-- Books -->
+    <record id="book_got" model="library.book">
+        <field name="name">A Game of Thrones</field>
+        <field name="resume">Lord Eddard (Ned) Stark of Winterfell is a responsible man who lives up to the words of his family: “winter is coming.” He fathered a child outside of wedlock but has claimed the boy, Jon, and raises him alongside his “trueborn” children, Robb, Sansa, Bran, Arya, and Rickon. They are all “summer children”—not one of them has known “winter.” Ned is teaching his children about the importance of carrying out justice. He has sentenced a deserter to death and carries out the execution himself because “the man who passes the sentence should swing the sword.” As Ned and his retainers leave, they come across a litter of direwolves. There is one for each of his children, including Jon. When Ned returns home, he learns that the king and his court are about to arrive in Winterfell.</field>
+        <field name="author_ids" eval="[(6, 0, [ref('library.author_martin')])]"/>
+        <field name="edition_date">1996-08-01</field>
+        <field name="isbn">0-553-10354-7</field>
+        <field name="publisher_id" ref="library.publisher_got"/>
+    </record>
+
+    <record id="book_watching_you" model="library.book">
+        <field name="name">I Am Watching You</field>
+        <field name="resume">When Ella Longfield overhears two attractive young men flirting with teenage girls on a train, she thinks nothing of it—until she realises they are fresh out of prison and her maternal instinct is put on high alert. But just as she’s decided to call for help, something stops her. The next day, she wakes up to the news that one of the girls—beautiful, green-eyed Anna Ballard—has disappeared. A year later, Anna is still missing. Ella is wracked with guilt over what she failed to do, and she’s not the only one who can’t forget. Someone is sending her threatening letters—letters that make her fear for her life. Then an anniversary appeal reveals that Anna’s friends and family might have something to hide. Anna’s best friend, Sarah, hasn’t been telling the whole truth about what really happened that night—and her parents have been keeping secrets of their own. Someone knows where Anna is—and they’re not telling. But they are watching Ella.</field>
+        <field name="author_ids" eval="[(6, 0, [ref('library.author_driscoll')])]"/>
+        <field name="edition_date">2017-10-01</field>
+        <field name="isbn">1-543-61767-0</field>
+        <field name="publisher_id" ref="library.publisher_amazon"/>
+    </record>
+
+    <record id="book_light_of_other_days" model="library.book">
+        <field name="name">The Light of Other Days</field>
+        <field name="resume">When a brilliant, driven industrialist harnesses the cutting edge of quantum physics to enable people everywhere, at trivial cost, to see one another at all times: around every corner, through every wall, into everyone's most private, hidden, and even intimate moments. It amounts to the sudden and complete abolition of human privacy--forever. </field>
+        <field name="author_ids" eval="[(6, 0, [ref('library.author_arthur_cc'), ref('library.author_baxter')])]"/>
+        <field name="edition_date">2000-04-16</field>
+        <field name="isbn">0-812-57640-3</field>
+        <field name="publisher_id" ref="library.publisher_amazon"/>
     </record>
 </odoo>

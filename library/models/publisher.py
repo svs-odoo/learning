@@ -7,4 +7,4 @@ class Publisher(models.Model):
     _description = 'Publisher'
 
     name = fields.Char(require=True)
-    book_ids = fields.Many2many('library.book', string='Published Books')
+    book_ids = fields.One2many('library.book', 'publisher_id', string='Published Books')

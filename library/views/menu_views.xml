@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+        id="menu_root"
+        name="Library"
+        web_icon="library,static/description/icon.png"
+    />
+<!-- Books Menu -->
+    <menuitem
+        id="book_menu"
+        name="Books"
+        parent="library.menu_root"
+    />
+
+    <menuitem
+        id="book_menu_action"
+        name="Books"
+        parent="library.book_menu"
+        action="library.book_action"
+    />
+
+    <menuitem
+        id="copy_menu_action"
+        name="Copies"
+        parent="library.book_menu"
+        action="library.copy_action"
+    />
+
+    <menuitem
+        id="rental_menu_action"
+        name="Rentals"
+        parent="library.book_menu"
+        action="rental_action"
+    />
+<!-- Partners Menu -->
+    <!-- <menuitem
+        id="partner_menu"
+        name="Partners"
+        parent="menu_root"
+    />
+
+    <menuitem
+        id="partner_menu_action"
+        name="Partners"
+        parent="library.partner_menu"
+        action="library.partner_action"
+    /> -->
+</odoo>
