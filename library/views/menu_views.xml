@@ -33,16 +33,29 @@
         action="rental_action"
     />
 <!-- Partners Menu -->
-    <!-- <menuitem
+    <menuitem
         id="partner_menu"
-        name="Partners"
+        name="Customer"
         parent="menu_root"
     />
 
     <menuitem
         id="partner_menu_action"
-        name="Partners"
+        name="Customers"
         parent="library.partner_menu"
         action="library.partner_action"
-    /> -->
+    />
+<!-- Configuration Menu -->
+    <menuitem
+        id="configuration_menu"
+        name="Configurations"
+        parent="library.menu_root"
+    />
+
+    <menuitem
+        id="price_menu_action"
+        name="Prices"
+        parent="library.configuration_menu"
+        action="library.price_action"
+    />
 </odoo>

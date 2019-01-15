@@ -4,8 +4,8 @@ from odoo import api, fields, models
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    firstname = fields.Char(require=True)
-    lastname = fields.Char(require=True)
+    firstname = fields.Char()
+    lastname = fields.Char()
     # name = fields.Char(compute='_compute_name', store=True)
 
     # @api.depends('firstname', 'lastname')

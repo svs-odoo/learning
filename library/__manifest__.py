@@ -15,17 +15,20 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base'],
+    'depends': ['base', 'product'],
 
     'data': [
         'security/ir.model.access.csv',
         'views/book_views.xml',
         'views/partner_views.xml',
+        'views/price_views.xml',
         'views/rental_views.xml',
         'views/menu_views.xml',
+        'data/cron.xml',
+        'data/mail.xml',
     ],
     'demo': [
-        'demo/demo.xml',
+        'data/demo.xml',
     ],
     'installable': True,
     'application': True,

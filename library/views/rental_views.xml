@@ -7,6 +7,7 @@
             <tree>
                 <field name="copy_id"/>
                 <field name="customer_id"/>
+                <field name="state"/>
                 <field name="rental_date"/>
                 <field name="return_date"/>
             </tree>
@@ -18,6 +19,13 @@
         <field name="model">library.rental</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="action_confirm" string="Confirm" states="draft" type="object"/>
+                    <button name="action_return" string="Returned" states="rented" type="object"/>
+                    <button name="action_lost" string="Lost" states="rented" type="object"/>
+                    <field name="state" widget="statusbar" nolabel="1"
+                        statusbar_visible="draft,rented,returned,lost"/>
+                </header>
                 <sheet>
                     <group string="Rental Informations">
                         <field name="customer_id" required="1"/>
@@ -40,5 +48,6 @@
         <field name="name">Rentals</field>
         <field name="res_model">library.rental</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', 'in', ['draft', 'rented'])]</field>
     </record>
 </odoo>
