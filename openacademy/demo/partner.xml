@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="partner_daenerys" model="datasample.partner">
+    <record id="datasample.partner_daenerys" model="res.partner">
         <field name="instructor" eval="True"/>
     </record>
 
-    <record id="partner_tyrion" model="datasample.partner">
+    <record id="datasample.partner_tyrion" model="res.partner">
         <field name="instructor" eval="True"/>
     </record>
 
-    <record id="partner_chris" model="datasample.partner">
+    <record id="datasample.partner_chris" model="res.partner">
         <field name="instructor" eval="True"/>
     </record>
 
-    <record id="partner_jill" model="datasample.partner">
+    <record id="datasample.partner_jill" model="res.partner">
         <field name="instructor" eval="True"/>
     </record>
 </odoo>
