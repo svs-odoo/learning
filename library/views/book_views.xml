@@ -26,7 +26,7 @@
                             <field name="name"/>
                         </h1>
                     </div>
-                    <group>
+                    <group name="book_info">
                         <group>
                             <field name="author_ids" widget="many2many_tags"/>
                             <field name="resume"/>
@@ -50,7 +50,7 @@
 <!-- Copy Views -->
     <record id="copy_view_tree" model="ir.ui.view">
         <field name="name">library.copy.tree</field>
-        <field name="model">library.book.copy</field>
+        <field name="model">library.copy</field>
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
@@ -65,8 +65,18 @@
 
     <record id="copy_view_form" model="ir.ui.view">
         <field name="name">library.copy.form</field>
-        <field name="model">library.book.copy</field>
+        <field name="model">library.copy</field>
+        <!-- <field name="inherit_id" ref="library.book_view_form"/> -->
         <field name="arch" type="xml">
+            <!-- <field name="name" position="replace">
+                <field name="book_id"/>
+            </field>
+            <field name="isbn" position="before">
+                <field name="note"/>
+            </field>
+            <group name="book_info" position="attributes">
+                <attributes name="readonly">1</attributes>
+            </group> -->
             <form>
                 <sheet>
                     <div class="oe_title">
@@ -97,7 +107,7 @@
 
     <record id="copy_action" model="ir.actions.act_window">
         <field name="name">Copies</field>
-        <field name="res_model">library.book.copy</field>
+        <field name="res_model">library.copy</field>
         <field name="view_mode">tree,form</field>
     </record>
 </odoo>

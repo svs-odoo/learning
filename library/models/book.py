@@ -13,11 +13,11 @@ class Book(models.Model):
     edition_date = fields.Date()
     isbn = fields.Char(string='ISBN')
 
-    copy_ids = fields.One2many('library.book.copy', 'book_id', string='Book Copies')
+    copy_ids = fields.One2many('library.copy', 'book_id', string='Book Copies')
 
 
 class BookCopy(models.Model):
-    _name = 'library.book.copy'
+    _name = 'library.copy'
     _description = 'Book Copy'
     _rec_name = 'reference'
 
@@ -32,9 +32,11 @@ class BookCopy(models.Model):
 
     @api.depends('book_id', 'note')
     def _compute_reference(self):
-        if self.book_id:
+        if self.book_id and self.name:
             self.reference = self.name
-        if self.note:
-            self.reference += ' - ' + self.note
+            if self.note:
+                self.reference += ' - ' + self.note
+            else:
+                self.reference += ' - [copy]'
         else:
-            self.reference += ' - [copy]'
+            self.reference = '[no reference]'

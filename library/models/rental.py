@@ -7,7 +7,7 @@ class Rental(models.Model):
     _description = 'Book Rental'
 
     customer_id = fields.Many2one('res.partner', string='Customer')
-    copy_id = fields.Many2one('library.book.copy', string='Book Copy')
+    copy_id = fields.Many2one('library.copy', string='Book Copy')
     book_id = fields.Many2one('library.book', string='Book',
         related="copy_id.book_id", readonly=True)
 
