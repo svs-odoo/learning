@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!-- Courses -->
     <record id="course_dragon" model="openacademy.course">
         <field name="name">Dragon 101</field>
         <field name="description">You will learn how to train your dragon</field>
@@ -13,14 +14,14 @@
         <field name="responsible_id" ref="datasample.partner_chris"/>
         <field name="level">2</field>
     </record>
-
+<!-- Sessions -->
     <record id="session_dragon1" model="openacademy.session">
         <field name="name">Dragon 101 - Session 1</field>
         <field name="duration">5</field>
         <field name="seats">6</field>
         <field name="instructor_id" ref="datasample.partner_tyrion"/>
         <field name="course_id" ref="course_dragon"/>
-        <field name="state">confirmed</field>
+        <field name="state">draft</field>
     </record>
 
     <record id="session_dragon2" model="openacademy.session">
@@ -29,7 +30,7 @@
         <field name="seats">6</field>
         <field name="instructor_id" ref="datasample.partner_daenerys"/>
         <field name="course_id" ref="course_dragon"/>
-        <field name="state">confirmed</field>
+        <field name="state">draft</field>
     </record>
 
     <record id="session_zombie1" model="openacademy.session">
@@ -38,6 +39,6 @@
         <field name="seats">4</field>
         <field name="instructor_id" ref="datasample.partner_jill"/>
         <field name="course_id" ref="course_zombie"/>
-        <field name="state">confirmed</field>
+        <field name="state">draft</field>
     </record>
 </odoo>

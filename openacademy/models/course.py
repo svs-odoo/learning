@@ -24,18 +24,20 @@ class Course(models.Model):
 
 class Session(models.Model):
     _name = 'openacademy.session'
+    _inherit = ['mail.thread']
+    _order = 'name'
     _description = 'Session'
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
-    status = fields.Selection(
+    state = fields.Selection(
         [('draft', 'Draft'), ('confirmed', 'Confirmed'), ('done', 'Done')],
         string='Status', default='draft')
+    level = fields.Selection(related='course_id.level')
 
     start_date = fields.Date(default=fields.Date.context_today)
     end_date = fields.Date(default=fields.Date.context_today)
     duration = fields.Float(digits=(6, 2), help='Duration in days', default=1)
-    level = fields.Selection(related='course_id.level')
 
     course_id = fields.Many2one('openacademy.course', string='Course',
        ondelete='cascade', required=True)
@@ -45,8 +47,14 @@ class Session(models.Model):
     attendee_ids = fields.Many2many('res.partner', string='Attendees')
     attendees_count = fields.Integer(compute='_get_attendees_count', store=True)
 
-    seats = fields.Integer()
+    seats = fields.Integer(default=1, help="Number of seats availible for this session")
     taken_seats = fields.Integer(compute='_compute_taken_seats', store=True)
+
+    def _warning(self, title, message):
+        return {'warning': {
+            'title': title,
+            'message': message,
+            }}
 
     @api.depends('seats', 'attendee_ids')
     def _compute_taken_seats(self):
@@ -62,16 +70,18 @@ class Session(models.Model):
             session.attendees_count = len(session.attendee_ids)
 
     @api.onchange('seats', 'attendee_ids')
-    def _check_taken_seats(self):
-        for session in self:
-            if session.taken_seats > 100:
-                return {'warning': {
-                    'title': 'Too many attendees for this session !',
-                    'message':
-                        'This session has %s and have already %s attendees registred.' % (
-                            session.seats, len(session.attendee_ids)
-                            )
-                }}
+    def _check_valid_seats(self):
+        for record in self:
+            if record.seats < 1:
+                return self._warning(
+                    'Not enough seats !',
+                    'A session must contain at least one seat.'
+                )
+            if record.seats < record.attendees_count:
+                return self._warning(
+                    'Too many attendees for this session !',
+                    'This session has %s and have already %s attendees registred.' % (record.seats, len(record.attendee_ids))
+                )
 
     @api.onchange('start_date', 'end_date')
     def _compute_duration(self):
@@ -94,3 +104,45 @@ class Session(models.Model):
         #     }}
         # delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
         # self.duration = delta.days + 1
+
+    # Actions
+    @api.multi
+    def action_draft(self):
+        for record in self:
+            record.state = 'draft'
+            record.message_post(body="Session '%s' state was reset to draft." % (record.name))
+
+    @api.multi
+    def action_confirm(self):
+        for record in self:
+            record.state = 'confirmed'
+            record.message_post(body="Session '%s' is confirmed !" % (record.name))
+
+    @api.multi
+    def action_done(self):
+        for record in self:
+            record.state = 'done'
+            record.message_post(body="Session '%s' is marked as done." % (record.name))
+
+    def _auto_confirm(self):
+        for record in self:
+            if record.taken_seats > 50 and record.state == 'draft':
+                record.action_confirm()
+
+    # Overide
+    @api.multi
+    def write(self, vals):
+        res = super(Session, self).write(vals)
+        for record in self:
+            record._auto_confirm()
+            if vals.get('instructor_id'):
+                self.message_subscribe([vals['instructor_id']])
+        return res
+
+    @api.model
+    def create(self, vals):
+        res = super(Session, self).create(vals)
+        res._auto_confirm()
+        if vals.get('instructor_id'):
+            res.message_subscribe([vals['instructor_id']])
+        return res
