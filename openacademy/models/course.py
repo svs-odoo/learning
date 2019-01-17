@@ -16,11 +16,30 @@ class Course(models.Model):
     level = fields.Selection([(1, 'Beginner'), (2, 'Confirmed'), (3, 'Gooroo')],
        string='Difficulty Level')
     session_count = fields.Integer(compute="_compute_session_count")
+    attendees_count = fields.Integer(compute="_compute_attendees_count")
+
+    @api.depends('session_ids.attendees_count')
+    def _compute_attendees_count(self):
+        for course in self:
+            course.attendees_count = len(course.mapped('session_ids.attendee_ids'))
 
     @api.depends('session_ids')
     def _compute_session_count(self):
         for course in self:
             course.session_count = len(course.session_ids)
+
+    @api.multi
+    def open_attendees(self):
+        self.ensure_one()
+        attendee_ids = self.session_ids.mapped('attendee_ids')
+        return {
+            'name': 'Attendees of %s' % (self.name),
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.partner',
+            'view_mode': 'tree,form',
+            'view_type': 'form',
+            'domain': [('id', 'in', attendee_ids.ids)]
+        }
 
 class Session(models.Model):
     _name = 'openacademy.session'
