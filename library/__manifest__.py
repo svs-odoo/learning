@@ -24,6 +24,7 @@
         'views/price_views.xml',
         'views/rental_views.xml',
         'views/menu_views.xml',
+        'views/wizard_views.xml',
         'data/cron.xml',
         'data/mail.xml',
     ],
