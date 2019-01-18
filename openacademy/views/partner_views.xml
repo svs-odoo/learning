@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<!-- Partner Views -->
     <record id="partner_view_tree" model="ir.ui.view">
         <field name="name">openacademy.partner.tree</field>
         <field name="model">res.partner</field>
@@ -28,11 +29,15 @@
                     <field name="instructor"/>
                 </group>
             </group>
-            <page name="sales_purchases" position="after">
-                <page string="Attended Sessions" name="openacademy">
-                    <field name="session_ids"/>
+            <notebook position="inside">
+                <page string="Sessions">
+                    <group>
+                        <field name="instructor"/>
+                        <field name="level"/>
+                        <field name="session_ids"/>
+                    </group>
                 </page>
-            </page>
+            </notebook>
         </field>
     </record>
 
@@ -63,5 +68,11 @@
         <field name="view_mode">form</field>
         <field name="view_id" ref="openacademy.partner_view_form"/>
         <field name="act_window_id" ref="openacademy.partner_action"/>
+    </record>
+<!-- Groups Views -->
+    <record id="partner_category_action" model="ir.actions.act_window">
+        <field name="name">Groups</field>
+        <field name="res_model">res.partner.category</field>
+        <field name="view_mode">tree,form</field>
     </record>
 </odoo>

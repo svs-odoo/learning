@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <!-- Courses -->
-    <record id="course_dragon" model="openacademy.course">
-        <field name="name">Dragon 101</field>
-        <field name="description">You will learn how to train your dragon</field>
-        <field name="responsible_id" ref="datasample.partner_daenerys"/>
+    <record id="course_dragon_technical" model="openacademy.course">
+        <field name="name">Dragon Technical Training</field>
+        <field name="description">You will learn how to train your dragon theorycally</field>
+        <field name="responsible_id" ref="partner_daenerys"/>
         <field name="level">1</field>
+    </record>
+
+    <record id="course_dragon_functionnal" model="openacademy.course">
+        <field name="name">Dragon Functionnal Training</field>
+        <field name="description">You will learn how to train your dragon pratically</field>
+        <field name="responsible_id" ref="partner_ned"/>
+        <field name="level">3</field>
     </record>
 
     <record id="course_zombie" model="openacademy.course">
         <field name="name">Raccoon City - Training Ground</field>
         <field name="description">You will learn how to survive in a deadly city</field>
-        <field name="responsible_id" ref="datasample.partner_chris"/>
+        <field name="responsible_id" ref="partner_chris"/>
         <field name="level">2</field>
     </record>
 <!-- Sessions -->
-    <record id="session_dragon1" model="openacademy.session">
-        <field name="name">Dragon 101 - Session 1</field>
+    <record id="session_dragon_technical1" model="openacademy.session">
+        <field name="name">Dragon Technical - Session 1</field>
         <field name="duration">5</field>
         <field name="seats">6</field>
-        <field name="instructor_id" ref="datasample.partner_tyrion"/>
-        <field name="course_id" ref="course_dragon"/>
+        <field name="instructor_id" ref="partner_tyrion"/>
+        <field name="course_id" ref="course_dragon_technical"/>
         <field name="state">draft</field>
     </record>
 
-    <record id="session_dragon2" model="openacademy.session">
-        <field name="name">Dragon 101 - Session 2</field>
+    <record id="session_dragon_technical2" model="openacademy.session">
+        <field name="name">Dragon Technical - Session 2</field>
         <field name="duration">5</field>
         <field name="seats">6</field>
-        <field name="instructor_id" ref="datasample.partner_daenerys"/>
-        <field name="course_id" ref="course_dragon"/>
+        <field name="instructor_id" ref="partner_daenerys"/>
+        <field name="course_id" ref="course_dragon_technical"/>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="session_dragon_functionnal1" model="openacademy.session">
+        <field name="name">Dragon Functionnal - Session 1</field>
+        <field name="duration">7.5</field>
+        <field name="seats">7</field>
+        <field name="instructor_id" ref="partner_ned"/>
+        <field name="course_id" ref="course_dragon_functionnal"/>
         <field name="state">draft</field>
     </record>
 
@@ -37,7 +53,7 @@
         <field name="name">RC Training Ground - Session 1</field>
         <field name="duration">7</field>
         <field name="seats">4</field>
-        <field name="instructor_id" ref="datasample.partner_jill"/>
+        <field name="instructor_id" ref="partner_jill"/>
         <field name="course_id" ref="course_zombie"/>
         <field name="state">draft</field>
     </record>

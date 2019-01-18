@@ -19,21 +19,22 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'datasample', 'mail'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/course_views.xml',
         'views/session_views.xml',
         'views/partner_views.xml',
         'views/menu_views.xml',
         'views/wizard_views.xml',
+        'demo/partner.xml',
+        'demo/demo.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
-        'demo/demo.xml',
-        'demo/partner.xml',
     ],
     'installable': True,
     'application': True,

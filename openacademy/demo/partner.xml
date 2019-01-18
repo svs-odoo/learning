@@ -1,18 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="datasample.partner_daenerys" model="res.partner">
+<!-- Teacher Levels -->
+    <record id="teacher_level1" model="res.partner.category">
+        <field name="name">Teacher Level 1</field>
+    </record>
+
+    <record id="teacher_level2" model="res.partner.category">
+        <field name="name">Teacher Level 2</field>
+    </record>
+
+    <record id="teacher_level3" model="res.partner.category">
+        <field name="name">Teacher Level 3</field>
+    </record>
+<!-- Partners -->
+    <record id="partner_daenerys" model="res.partner">
+        <field name="name">Daenerys Targaryan</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="instructor" eval="True"/>
+        <field name="customer" eval="False"/>
+        <field name="category_id" eval="[(4,ref('teacher_level3'),0)]"/>
+    </record>
+
+    <record id="partner_ned" model="res.partner">
+        <field name="name">Ned Stark</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="instructor" eval="True"/>
+        <field name="customer" eval="False"/>
+        <field name="category_id" eval="[(4,ref('teacher_level1'),0)]"/>
+    </record>
+
+    <record id="partner_tyrion" model="res.partner">
+        <field name="name">Tyrion Lannister</field>
+        <field name="instructor" eval="True"/>
+        <field name="email">littlebiglion@westeros.com</field>
+        <field name="phone">061 24 54 87</field>
+    </record>
+
+    <record id="partner_arya" model="res.partner">
+        <field name="name">Arya Stark</field>
+        <field name="email">the_girl_who_has_no_name@westeros.com</field>
+    </record>
+
+    <record id="partner_chris" model="res.partner">
+        <field name="instructor" eval="True"/>
+        <field name="category_id" eval="[(4,ref('teacher_level2'),0)]"/>
+        <field name="name">Chris Redfield</field>
+        <field name="phone">0495 35 56 74</field>
+        <field name="customer" eval="False"/>
+    </record>
+
+    <record id="partner_jill" model="res.partner">
+        <field name="name">Jill Valentine</field>
+        <field name="email">valentine.jill@rcpd.com</field>
         <field name="instructor" eval="True"/>
     </record>
 
-    <record id="datasample.partner_tyrion" model="res.partner">
-        <field name="instructor" eval="True"/>
+    <record id="partner_claire" model="res.partner">
+        <field name="name">Claire Redfield</field>
+        <field name="phone">0485 / 22 15 48</field>
     </record>
 
-    <record id="datasample.partner_chris" model="res.partner">
-        <field name="instructor" eval="True"/>
+    <record id="partner_leon" model="res.partner">
+        <field name="name">Leon Kennedy</field>
+        <field name="phone">0456 / 54 62 33</field>
     </record>
 
-    <record id="datasample.partner_jill" model="res.partner">
-        <field name="instructor" eval="True"/>
+    <record id="partner_ada" model="res.partner">
+        <field name="name">Ada Wong</field>
+        <field name="email">redbutterfly@smail.com</field>
+    </record>
+
+    <record id="partner_wesker" model="res.partner">
+        <field name="name">Albert Wesker</field>
+        <field name="email">wesker.albert@rcpd.com</field>
+    </record>
+<!-- Users -->
+    <record id="user_daenerys" model="res.users">
+        <field name="name">Daenerys Targaryan</field>
+        <field name="partner_id" ref="partner_daenerys"/>
+        <field name="email">daenerys@odoo.com</field>
+        <field name="login">daenerys@odoo.com</field>
+        <field name="password">odoo</field>
+        <field name="compagny_id" ref="base.main_company"/>
+        <field name="compagny_ids" eval="[(4,ref('base.main_company'))]"/>
+        <field name="signature"><![CDATA[<span>-- <br/>
+        Daenerys Targaryan</span>]]></field>
+    </record>
+
+    <record id="user_ned" model="res.users">
+        <field name="name">Ned Stark</field>
+        <field name="partner_id" ref="partner_ned"/>
+        <field name="email">ned@odoo.com</field>
+        <field name="login">ned@odoo.com</field>
+        <field name="password">odoo</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="company_ids" eval="[(4,ref('base.main_company'))]"/>
+        <field name="signature"><![CDATA[<span>-- <br/>
+	    Ned Stark</span>]]></field>
+    </record>
+
+     <record id="user_chris" model="res.users">
+        <field name="name">Chris Redfield</field>
+        <field name="partner_id" ref="partner_chris"/>
+        <field name="email">redfield.chris@rcpd.com</field>
+        <field name="login">redfield.chris@rcpd.com</field>
+        <field name="password">odoo</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="company_ids" eval="[(4,ref('base.main_company'))]"/>
+        <field name="signature"><![CDATA[<span>-- <br/>
+	    Chris Redfield, S.T.A.R.S. Officer</span>]]></field>
     </record>
 </odoo>

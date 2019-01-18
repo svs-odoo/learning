@@ -23,9 +23,20 @@
         action="session_action"
     />
     <menuitem
-        id="partner_menu_action"
+        id="partner_menu"
         name="Contacts"
         parent="openacademy.root_menu"
+    />
+    <menuitem
+        id="partner_menu_action"
+        name="Contacts"
+        parent="openacademy.partner_menu"
         action="partner_action"
+    />
+    <menuitem
+        id="groups_menu_action"
+        name="Groups"
+        parent="openacademy.partner_menu"
+        action="partner_category_action"
     />
 </odoo>

@@ -32,12 +32,15 @@
                         </button>
                     </div>
                     <div class="oe_title">
+                        <label for="name" class="oe_edit_only"/>
                         <h1>
                             <field name="name"/>
                         </h1>
                     </div>
                     <group>
-                        <field name="responsible_id"/>
+                        <field name="can_edit_responsible" invisible="1"/>
+                        <field name="responsible_id"
+                            attrs="{'readonly': [('can_edit_responsible', '=', False)]}"/>
                         <field name="level"/>
                     </group>
                     <notebook>

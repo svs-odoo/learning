@@ -10,6 +10,7 @@ class Course(models.Model):
     description = fields.Text()
 
     responsible_id = fields.Many2one('res.partner', string='Responsible')
+    can_edit_responsible = fields.Boolean(compute='_compute_can_edit_responsible')
     session_ids = fields.One2many('openacademy.session', 'course_id',
         string='Sessions')
 
@@ -28,6 +29,10 @@ class Course(models.Model):
         for course in self:
             course.session_count = len(course.session_ids)
 
+    @api.depends('responsible_id')
+    def _compute_can_edit_responsible(self):
+        self.can_edit_responsible = self.env.user.has_group('openacademy.group_admin')
+
     @api.multi
     def open_attendees(self):
         self.ensure_one()
@@ -40,6 +45,7 @@ class Course(models.Model):
             'view_type': 'form',
             'domain': [('id', 'in', attendee_ids.ids)]
         }
+
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -108,21 +114,12 @@ class Session(models.Model):
             if not (session.start_date and session.end_date):
                 return
             if session.end_date < session.start_date:
-                return {'warning': {
-                    'title': 'Incorrect date value',
-                    'message': 'End date is earlier than start date'
-                }}
+                return self._warning(
+                    'Incorrect date value',
+                    'End date is earlier than start date'
+                )
             delta = fields.Date.from_string(session.end_date) - fields.Date.from_string(session.start_date)
             session.duration = delta.days + 1
-        # if not (self.start_date and self.end_date):
-        #     return
-        # if self.end_date < self.start_date:
-        #     return {'warning': {
-        #         'title': 'Incorrect date value',
-        #         'message': 'End date is earlier then start date'
-        #     }}
-        # delta = fields.Date.from_string(self.end_date) - fields.Date.from_string(self.start_date)
-        # self.duration = delta.days + 1
 
     # Actions
     @api.multi
