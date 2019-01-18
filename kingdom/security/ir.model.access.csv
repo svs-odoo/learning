@@ -1,1 +1,8 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+kingdom_public,Kingdom All,model_res_company,,0,0,0,0
+citizen_advisor,Citizen Advisor,model_res_users,group_advisor,1,0,0,0
+citizen_public,Citizen All,model_res_users,,0,0,0,0
+army_advisor,Army Advisor,model_kingdom_army,group_advisor,1,0,0,0
+army_public,Army All,model_kingdom_army,,0,0,0,0
+economy_advisor,Economy Advisor,model_kingdom_city,group_advisor,1,0,0,0
+economy_public,Economy All,model_kingdom_city,,0,0,0,0
