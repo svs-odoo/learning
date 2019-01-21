@@ -23,9 +23,14 @@ class TaskType(models.Model):
 
     name = fields.Char()
     description = fields.Text()
+    complete_name = fields.Char(compute='_compute_complete_name')
 
     area = fields.Many2one('datasample.area')
     active = fields.Boolean(default=True)
+
+    @api.depends('name', 'description')
+    def _compute_complete_name(self):
+        self.complete_name = self.name + ' - ' + self.description
 
 
 class TaskTemplate(models.Model):
@@ -100,7 +105,7 @@ class Task(models.Model):
     _name = 'coopplanning.task'
     _description = 'Task'
 
-    name = fields.Char()
+    name = fields.Char(related='task_type_id.complete_name')
 
     task_template_id = fields.Many2one('coopplanning.task.template')
     task_type_id = fields.Many2one('coopplanning.task.type')

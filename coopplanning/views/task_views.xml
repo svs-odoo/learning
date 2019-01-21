@@ -115,8 +115,7 @@
         <field name="model">coopplanning.task</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="task_type_id"/>
-                <field name="name"/>
+                <field name="name" string="Name"/>
                 <field name="worker_id"/>
                 <field name="start_time"/>
                 <field name="end_time"/>
@@ -132,7 +131,7 @@
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="name"/>
+                            <field name="name" readonly="1"/>
                         </h1>
                     </div>
                     <group>
