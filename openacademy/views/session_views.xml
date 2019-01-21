@@ -23,6 +23,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="create_invoice" type="object"
+                        string="Generate Invoice"
+                        attrs="{'invisible': [('is_paid', '=', True)]}"/>
                     <button name="action_draft" type="object"
                         string="Reset to draft"
                         attrs="{'invisible': [('state', '=', 'draft')]}"/>
@@ -44,6 +47,7 @@
                         <field name="level"/>
                         <field name="instructor_id" domain="[('instructor', '=', True)]"/>
                         <field name="active"/>
+                        <field name="is_paid" invisible="1"/>
                     </group>
                     <group>
                         <field name="start_date"/>
@@ -51,6 +55,7 @@
                         <field name="duration"/>
                         <field name="seats"/>
                         <field name="taken_seats" widget="progressbar"/>
+                        <field string="Price" name="price" readonly="1"/>
                     </group>
                     <label for="attendee_ids" groups="openacademy.master"/>
                     <field name="attendee_ids" groups="openacademy.master"/>

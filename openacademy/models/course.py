@@ -19,6 +19,9 @@ class Course(models.Model):
     session_count = fields.Integer(compute="_compute_session_count")
     attendees_count = fields.Integer(compute="_compute_attendees_count")
 
+    currency_id = fields.Many2one('res.currency', "Currency")
+    product_id = fields.Many2one('product.template', "Product")
+
     @api.depends('session_ids.attendees_count')
     def _compute_attendees_count(self):
         for course in self:
@@ -74,6 +77,10 @@ class Session(models.Model):
 
     seats = fields.Integer(default=1, help="Number of seats availible for this session")
     taken_seats = fields.Integer(compute='_compute_taken_seats', store=True)
+
+    is_paid = fields.Boolean(default=False, string="Is Paid")
+    product_id = fields.Many2one(related='course_id.product_id')
+    price = fields.Float(related='product_id.lst_price')
 
     def _warning(self, title, message):
         return {'warning': {
@@ -162,3 +169,32 @@ class Session(models.Model):
         if vals.get('instructor_id'):
             res.message_subscribe([vals['instructor_id']])
         return res
+
+    @api.multi
+    def create_invoice(self):
+        # We search existing invoice
+        teacher_invoice = self.env['account.invoice'].search([
+            ('partner_id', '=', self.instructor_id.id)
+        ], limit=1)
+
+        # If no existing invoice, we create one
+        if not teacher_invoice:
+            teacher_invoice = self.env['account.invoice'].create({
+                'partner_id': self.instructor_id.id
+            })
+
+        # Then, we add a new line in the invoice of the session's responsible
+        expense_account = self.env['account.account'].search([
+            ('user_type_id', '=', self.env.ref('account.data_account_type_expenses').id)
+        ], limit=1)
+        self.env['account.invoice.line'].create({
+            'invoice_id': teacher_invoice.id,
+            'product_id': self.product_id.id,
+            'price_unit': self.price,
+            'account_id': expense_account.id,
+            'name': 'Session',
+            'quantity': 1,
+        })
+
+        # We mark the session as paid
+        self.write({'is_paid': True})

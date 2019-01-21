@@ -42,6 +42,7 @@
                         <field name="responsible_id"
                             attrs="{'readonly': [('can_edit_responsible', '=', False)]}"/>
                         <field name="level"/>
+                        <field name="product_id"/>
                     </group>
                     <notebook>
                         <page string="Description" name="desc">
