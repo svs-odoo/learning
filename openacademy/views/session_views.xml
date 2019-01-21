@@ -57,8 +57,12 @@
                         <field name="taken_seats" widget="progressbar"/>
                         <field string="Price" name="price" readonly="1"/>
                     </group>
-                    <label for="attendee_ids" groups="openacademy.master"/>
-                    <field name="attendee_ids" groups="openacademy.master"/>
+                    <notebook>
+                        <!-- <page string="Attendees" groups="openacademy.master"> -->
+                        <page string="Attendees">
+                            <field name="attendee_ids"/>
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>

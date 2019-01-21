@@ -30,6 +30,7 @@
         'views/partner_views.xml',
         'views/menu_views.xml',
         'views/wizard_views.xml',
+        'report/session.xml',
         'demo/partner.xml',
         'demo/demo.xml',
     ],
