@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="rent_page">
+        <t t-call="website.layout">
+            <t t-set="title">Library - Rent a book</t>
+            <div class="oe_structure"></div>
+            <div class="oe_structure">
+                <div class="container">
+                    <h2>Book list:</h2>
+                    <ul>
+                        <t t-foreach="copies" t-as="copy">
+                            <li>
+                                <a t-attf-href="/library/{{copy.id}}">
+                                    <b><t t-esc="copy.book_id.name"/></b>
+                                    <span class="small">(<t t-esc="copy.reference"/>)</span>
+                                </a>
+                            </li>
+                        </t>
+                    </ul>
+                </div>
+            </div>
+            <div class="oe_structure"></div>
+        </t>
+    </template>
+
+    <template id="book_page">
+        <t t-call="website.layout">
+            <t t-set="title">Library - Rent a book</t>
+            <div class="oe_structure"></div>
+            <div class="oe_structure">
+                <div class="container">
+                    <h2>Book Informations:</h2>
+                    <div>
+                        <h3><b><t t-esc="copy.book_id.name"/></b><span class="small"> by
+                            <t t-foreach="copy.book_id.author_ids" t-as="author">
+                                <t t-if="author_index > 0">, </t>
+                                <i><b> <t t-esc="author.name"/></b></i>
+                            </t>
+                        </span></h3>
+                        <p>
+                            <b><i>Resume</i></b><br/>
+                            <t t-esc="copy.book_id.resume"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure">
+                <div class="container">
+                    <a role="button" class="btn btn-primary" t-attf-href="/library/rent/{{copy.id}}">Rent this book !</a>
+                    <a role="button" class="btn btn-secondary" href="/library/">Return to Library</a>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

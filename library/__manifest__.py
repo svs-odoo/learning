@@ -15,7 +15,7 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'website', 'website_sale'],
 
     'data': [
         'security/ir.model.access.csv',
@@ -27,6 +27,7 @@
         'views/wizard_views.xml',
         'data/cron.xml',
         'data/mail.xml',
+        'website/template.xml',
     ],
     'demo': [
         'data/demo.xml',
