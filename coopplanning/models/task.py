@@ -30,7 +30,10 @@ class TaskType(models.Model):
 
     @api.depends('name', 'description')
     def _compute_complete_name(self):
-        self.complete_name = self.name + ' - ' + self.description
+        for task_type in self:
+            task_type.complete_name = task_type.name
+            if task_type.description:
+                task_type.complete_name += ' - ' + task_type.description
 
 
 class TaskTemplate(models.Model):

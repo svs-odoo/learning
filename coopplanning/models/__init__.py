@@ -1,2 +1,2 @@
 
-from . import daynumber, task
+from . import daynumber, partner, task

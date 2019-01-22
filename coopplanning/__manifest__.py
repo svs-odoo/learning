@@ -16,13 +16,14 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    'depends': ['base', 'datasample'],
+    'depends': ['base', 'contacts', 'datasample'],
 
     'data': [
         'security/ir.model.access.csv',
         'views/daynumber_views.xml',
         'views/task_views.xml',
         'views/menu_views.xml',
+        'report/task.xml',
     ],
     'demo': [
         'demo/demo.xml',
