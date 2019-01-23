@@ -74,8 +74,15 @@
     <record id="partner_action" model="ir.actions.act_window">
         <field name="name">Customers</field>
         <field name="res_model">res.partner</field>
-        <field name="domain">[('customer', '=', True)]</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('customer', '=', True)]</field>
+    </record>
+
+    <record id="bad_customer_action" model="ir.actions.act_window">
+        <field name="name">Bad Customers</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('customer', '=', True), ('amount_owed', '&gt;', 10)]</field>
     </record>
 
     <record id="partner_action_view_tree" model="ir.actions.act_window.view">

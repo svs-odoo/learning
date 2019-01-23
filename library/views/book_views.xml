@@ -141,9 +141,64 @@
         </field>
     </record>
 
+    <record id="copy_view_kanban" model="ir.ui.view">
+        <field name="name">library.copy.kanban</field>
+        <field name="model">library.copy</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="book_id"/>
+                <field name="reference"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div>
+                                Book - <strong><field name="book_id"/></strong>
+                                <span class="small"> <field name="reference"/></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="copy_view_search" model="ir.ui.view">
+        <field name="name">library.copy.search</field>
+        <field name="model">library.copy</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <filter name="groupby_book" string="Book" context="{'group_by': 'book_id'}"/>
+            </search>
+        </field>
+    </record>
+
     <record id="copy_action" model="ir.actions.act_window">
         <field name="name">Copies</field>
         <field name="res_model">library.copy</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[(1, '=', 1)]</field>
+    </record>
+
+    <record id="copy_availible_action" model="ir.actions.act_window">
+        <field name="name">Availible Books</field>
+        <field name="res_model">library.copy</field>
         <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'availible')]</field>
+    </record>
+
+    <record id="copy_rented_action" model="ir.actions.act_window">
+        <field name="name">Rented Books</field>
+        <field name="res_model">library.copy</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('state', '=', 'rented')]</field>
+    </record>
+
+    <record id="copy_lost_action" model="ir.actions.act_window">
+        <field name="name">Lost Books</field>
+        <field name="res_model">library.copy</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('active', '=', False),('state', '=', 'lost')]</field>
     </record>
 </odoo>

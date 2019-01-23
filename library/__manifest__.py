@@ -18,7 +18,9 @@
     'depends': ['base', 'product', 'website', 'website_sale'],
 
     'data': [
+        'assets.xml',
         'security/ir.model.access.csv',
+        'views/dashboard.xml',
         'views/book_views.xml',
         'views/partner_views.xml',
         'views/price_views.xml',
@@ -31,6 +33,9 @@
     ],
     'demo': [
         'data/demo.xml',
+    ],
+    'qweb': [
+        'static/src/xml/dashboard.xml'
     ],
     'installable': True,
     'application': True,

@@ -11,7 +11,8 @@ class Rental(models.Model):
     copy_id = fields.Many2one('library.copy', string='Book Copy',
         required=True, domain=[('state', '=', 'availible')])
     book_id = fields.Many2one('product.product', string='Book',
-        related="copy_id.book_id", readonly=True, domain=[('is_book', '=', True)])
+        related="copy_id.book_id", readonly=True,
+        domain=[('is_book', '=', True)], store=True)
 
     rental_date = fields.Date(default=fields.Date.context_today, required=True)
     return_date = fields.Date(required=True)

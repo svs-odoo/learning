@@ -5,6 +5,13 @@
         name="Library"
         web_icon="library,static/description/icon.png"
     />
+    <menuitem
+        id="dashboard_menu"
+        name="Dashboard"
+        parent="menu_root"
+        action="library.dashboard"
+        sequence="1"
+    />
 <!-- Books Menu -->
     <menuitem
         id="book_menu"
