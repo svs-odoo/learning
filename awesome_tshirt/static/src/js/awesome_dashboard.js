@@ -2,7 +2,7 @@ odoo.define('awesome_tshirt.dashboard', function (require) {
 "use strict";
 
 var AbstractAction = require('web.AbstractAction');
-// var ControlPanelMixin = require('web.ControlPanelMixin');
+var ChartWidget = require('awesome_tshirt.ChartWidget');
 var core = require('web.core');
 var fieldUtils = require('web.field_utils');
 var _t = core._t;
@@ -30,6 +30,16 @@ var Dashboard = AbstractAction.extend({
         return Promise.all([promSuper, promStats]);
     },
 
+    /**
+     * @override
+     */
+    start: function () {
+        return Promise.all([
+            this._renderChart(),
+            this._super.apply(this, arguments),
+        ]);
+    },
+
 
     // --------------------------------------------------------------------------
     // Private
@@ -37,6 +47,7 @@ var Dashboard = AbstractAction.extend({
 
     /**
      * @private
+     * @param {*} params
      */
     _openCancelledOrders: function (params) {
         this._openLastestOrders({
@@ -80,6 +91,16 @@ var Dashboard = AbstractAction.extend({
         this._openLastestOrders({
             name: 'New Orders'
         });
+    },
+
+    /**
+     * @private
+     * @returns {Promise}
+     */
+    _renderChart: function () {
+        var pieChart = new ChartWidget(this, this.stats.orders_by_size);
+        this.$('.o_fancy_chart').empty();
+        return pieChart.appendTo(this.$('.o_fancy_chart'));
     },
 
     /**

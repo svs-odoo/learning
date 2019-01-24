@@ -2,7 +2,7 @@
 <odoo>
     <template id="assets_backend" name="awesome tshirt assets backend" inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <script src="/awesome_tshirt/static/src/js/counter_click.js"></script>
+            <script src="/awesome_tshirt/static/src/js/chart_widget.js"></script>
             <script src="/awesome_tshirt/static/src/js/awesome_dashboard.js"></script>
         </xpath>
 
