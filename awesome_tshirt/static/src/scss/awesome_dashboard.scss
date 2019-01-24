@@ -1,10 +1,16 @@
 
 $space: 8px;
+$font-size: 14px;
 
 .o_awesome_tshirt_dashboard {
     padding: $space;
 
     .o_controls {
         margin-bottom: $space * 3;
+    }
+
+    .o_statistics {
+        font-size: $font-size;
+        line-height: $font-size * 2;
     }
 }

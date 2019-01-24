@@ -4,6 +4,7 @@ odoo.define('awesome_tshirt.dashboard', function (require) {
 var AbstractAction = require('web.AbstractAction');
 // var ControlPanelMixin = require('web.ControlPanelMixin');
 var core = require('web.core');
+var fieldUtils = require('web.field_utils');
 var _t = core._t;
 
 
@@ -14,6 +15,21 @@ var Dashboard = AbstractAction.extend({
         'click .o_new_orders_btn': '_openNewOrders',
         'click .o_cancelled_orders_btn': '_openCancelledOrders',
     },
+
+    /**
+     * @override
+     */
+    willStart: function () {
+        var self = this;
+        var promSuper = this._super.apply(this, arguments);
+        var promStats = this._renderStats().then(function (stats) {
+            stats.average_time = fieldUtils.format.float_time(stats.average_time);
+            self.stats = stats;
+        });
+
+        return Promise.all([promSuper, promStats]);
+    },
+
 
     // --------------------------------------------------------------------------
     // Private
@@ -64,7 +80,17 @@ var Dashboard = AbstractAction.extend({
         this._openLastestOrders({
             name: 'New Orders'
         });
-    }
+    },
+
+    /**
+     * @private
+     * @returns {Promise<array>}
+     */
+    _renderStats: function () {
+        return this._rpc({
+            route: '/awesome_tshirt/statistics'
+        });
+    },
 });
 
 
