@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <div t-name="navigation">
+        <button class="">Customers</button>
+        <button class="">New Orders</button>
+        <button class="">Cancelled Orders</button>
+    </div>
+</templates>
