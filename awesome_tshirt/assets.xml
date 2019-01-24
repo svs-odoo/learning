@@ -5,5 +5,9 @@
             <script src="/awesome_tshirt/static/src/js/counter_click.js"></script>
             <script src="/awesome_tshirt/static/src/js/awesome_dashboard.js"></script>
         </xpath>
+
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/awesome_tshirt/static/src/scss/awesome_dashboard.scss"/>
+        </xpath>
     </template>
 </odoo>

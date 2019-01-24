@@ -19,6 +19,7 @@
         'views/templates.xml',
     ],
     'qweb': [
-        'static/src/xml/my_counter.xml'
+        'static/src/xml/my_counter.xml',
+        'static/src/xml/awesome_dashboard.xml',
     ]
 }

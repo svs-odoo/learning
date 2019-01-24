@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <templates id="template" xml:space="preserve">
-    <div t-name="MyCounter">
+    <div t-name="MyCounter" class="o_counter">
         <div class="buttons">
             <button class="btn btn-primary fa fa-plus"/>
             <button class="btn btn-secondary fa fa-minus"/>
