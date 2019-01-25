@@ -3,17 +3,18 @@ odoo.define('awesome_tshirt.dashboard', function (require) {
 
 var AbstractAction = require('web.AbstractAction');
 var ChartWidget = require('awesome_tshirt.ChartWidget');
+var ControlPanelMixin = require('web.ControlPanelMixin');
 var core = require('web.core');
 var fieldUtils = require('web.field_utils');
+
 var _t = core._t;
+var qweb = core.qweb;
 
 
-var Dashboard = AbstractAction.extend({
+var Dashboard = AbstractAction.extend(ControlPanelMixin, {
     template: 'AwesomeDashboard',
-    events: {
-        'click .o_customer_btn': '_openCustomer',
-        'click .o_new_orders_btn': '_openNewOrders',
-        'click .o_cancelled_orders_btn': '_openCancelledOrders',
+    custom_events: {
+        open_orders: '_onOpenOrders'
     },
 
     /**
@@ -34,10 +35,36 @@ var Dashboard = AbstractAction.extend({
      * @override
      */
     start: function () {
+        var self = this;
+
+        var promChart = this._renderChart();
+        var promSuper = this._super.apply(this, arguments);
+        this._renderButtons();
+
         return Promise.all([
-            this._renderChart(),
-            this._super.apply(this, arguments),
-        ]);
+            promChart,
+            promSuper,
+        ]).then(function () {
+            self._updateControlPanel();
+        });
+    },
+
+    /**
+     * @override
+     */
+    destroy: function () {
+        this._super.apply(this, arguments);
+        if (this.$buttons) {
+            this.$buttons.off();
+        }
+    },
+
+    /**
+     * @override
+     */
+    do_show: function () {
+        this._super.apply(this, arguments);
+        this._updateControlPanel();
     },
 
 
@@ -51,7 +78,7 @@ var Dashboard = AbstractAction.extend({
      */
     _openCancelledOrders: function (params) {
         this._openLastestOrders({
-            name: 'Cancelled Orders',
+            name: _t('Cancelled Orders'),
             domain: [['state', '=', 'cancelled']],
         });
     },
@@ -75,12 +102,9 @@ var Dashboard = AbstractAction.extend({
         limitDate = limitDate.local('en').format('YYYY-MM-DD HH:mm:ss');
         domain.concat([['create_date', '>=', limitDate]]);
 
-        this.do_action({
-            res_model: 'awesome_tshirt.order',
-            name: _t(params.name),
-            views: [[false, 'list'], [false, 'form']],
+        this._openOrders({
+            name: params.name,
             domain: domain,
-            type: 'ir.actions.act_window',
         });
     },
 
@@ -89,8 +113,32 @@ var Dashboard = AbstractAction.extend({
      */
     _openNewOrders: function () {
         this._openLastestOrders({
-            name: 'New Orders'
+            name: _t('New Orders'),
+            domain: [['state', '!=', 'cancelled']],
         });
+    },
+
+    /**
+     * @private
+     */
+    _openOrders: function (params) {
+        this.do_action({
+            res_model: 'awesome_tshirt.order',
+            name: params.name,
+            domain: params.domain,
+            views: [[false, 'list'], [false, 'form']],
+            type: 'ir.actions.act_window'
+        });
+    },
+
+    /**
+     * @private
+     */
+    _renderButtons: function () {
+        this.$buttons = $(qweb.render('AwesomeDashboard.Buttons'));
+        this.$buttons.on('click', '.o_customer_btn', this._openCustomer.bind(this));
+        this.$buttons.on('click', '.o_new_orders_btn', this._openNewOrders.bind(this));
+        this.$buttons.on('click', '.o_cancelled_orders_btn', this._openCancelledOrders.bind(this));
     },
 
     /**
@@ -110,6 +158,28 @@ var Dashboard = AbstractAction.extend({
     _renderStats: function () {
         return this._rpc({
             route: '/awesome_tshirt/statistics'
+        });
+    },
+
+    /**
+     * @private
+     */
+    _updateControlPanel: function () {
+        this.update_control_panel({
+            cp_content: {
+                $buttons: this.$buttons,
+            },
+        });
+    },
+
+    // --------------------------------------------------------------------------
+    // Handlers
+    // --------------------------------------------------------------------------
+
+    _onOpenOrders: function (ev) {
+        this._openOrders({
+            name: ev.data.name,
+            domain: ev.data.domain
         });
     },
 });

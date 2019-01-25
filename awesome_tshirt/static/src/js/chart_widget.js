@@ -2,7 +2,10 @@ odoo.define('awesome_tshirt.ChartWidget', function (require) {
 "use strict";
 
 var ajax = require('web.ajax');
+var core = require('web.core');
 var Widget = require('web.Widget');
+
+var _t = core._t;
 
 
 var ChartWidget = Widget.extend({
@@ -58,6 +61,9 @@ var ChartWidget = Widget.extend({
     // Private
     // --------------------------------------------------------------------------
 
+    /**
+     * @private
+     */
     _renderPieChart: function () {
         var self = this;
         var chartData = _.map(this.data.sizeLabel, function (size) {
@@ -73,11 +79,11 @@ var ChartWidget = Widget.extend({
                     data: chartData,
                     backgroundColor: this.data.color,
                     borderColor: [
-                        'rgba(255,99,132,1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
+                        'rgb(0, 0, 0)',
+                        'rgb(0, 0, 0)',
+                        'rgb(0, 0, 0)',
+                        'rgb(0, 0, 0)',
+                        'rgb(0, 0, 0)',
                     ],
                     borderWidth: 1,
                 }],
@@ -85,11 +91,32 @@ var ChartWidget = Widget.extend({
             },
             options: {
                 responsive: true,
+                onClick: this._onChartClicked.bind(this),
             }
         };
 
         new Chart(this.el, config);
-    }
+    },
+
+
+    // --------------------------------------------------------------------------
+    // Handlers
+    // --------------------------------------------------------------------------
+
+    _onChartClicked: function (ev, chartElement) {
+        if (chartElement[0]) {
+            var index = chartElement[0]._index;
+            var orders_size = chartElement[0]._chart.config.data.labels[index];
+
+            this.trigger_up('open_orders', {
+                name: _t('Orders for size ') + orders_size,
+                domain: [
+                    ['size', '=', orders_size.toLowerCase()],
+                    ['state', '!=', 'cancelled'],
+                ],
+            });
+        }
+    },
 });
 
 
