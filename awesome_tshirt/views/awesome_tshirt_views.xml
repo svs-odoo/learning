@@ -11,6 +11,7 @@
             <field name="state" widget="statusbar" clickable="1"/>
           </header>
           <sheet>
+            <widget name="warning_widget"/>
             <group>
               <group>
                 <field name="customer_id"/>
@@ -33,12 +34,14 @@
       <field name="arch" type="xml">
         <form>
           <group>
+            <field name="amount" invisible="1"/>
             <field name="customer_id"/>
             <field name="size"/>
             <field name="quantity"/>
             <field name="is_late" widget="late_boolean"/>
             <field name="image_url"/>
           </group>
+          <widget name="warning_widget"/>
         </form>
       </field>
     </record>
