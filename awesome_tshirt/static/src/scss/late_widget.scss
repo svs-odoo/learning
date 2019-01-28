@@ -1,0 +1,18 @@
+$size: 8px;
+$late-color: rgb(255, 100, 0);
+$not-late-color: rgb(150, 200, 255);
+
+.o_late_marker {
+    div {
+        width: $size * 2;
+        height: $size * 2;
+        border-radius: 50%;
+
+        background-color: $not-late-color;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+
+        &.is-late {
+            background-color: $late-color;
+        }
+    }
+}
