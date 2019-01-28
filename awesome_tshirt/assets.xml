@@ -6,6 +6,8 @@
             <script type="text/javascript" src="/awesome_tshirt/static/src/js/image_preview_widget.js"></script>
             <script type="text/javascript" src="/awesome_tshirt/static/src/js/late_widget.js"></script>
             <script type="text/javascript" src="/awesome_tshirt/static/src/js/warning_widget.js"></script>
+            <script type="text/javascript" src="/awesome_tshirt/static/src/js/customer_form_view.js"></script>
+            <script type="text/javascript" src="/awesome_tshirt/static/src/js/order_form_view.js"></script>
             <script type="text/javascript" src="/awesome_tshirt/static/src/js/awesome_dashboard.js"></script>
         </xpath>
 

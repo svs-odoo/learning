@@ -16,3 +16,9 @@ $font-size: 14px;
         flex: 1 1 0;
     }
 }
+
+.o_customer_form_buttons, .o_order_form_buttons {
+    .o_form_buttons_view, .o_form_buttons_edit {
+        display: inline-block;
+    }
+}
