@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-29 13:29+0000\n"
-"PO-Revision-Date: 2019-01-29 13:29+0000\n"
+"POT-Creation-Date: 2019-01-29 13:25+0000\n"
+"PO-Revision-Date: 2019-01-29 13:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: code:addons/awesome_tshirt/static/src/xml/warning_widget.xml:10
 #, python-format
 msgid "Add promotional material"
-msgstr "Ajouter quelques bidules"
+msgstr "Ajouter quelques goodies"
 
 #. module: awesome_tshirt
 #: model:ir.model.fields,field_description:awesome_tshirt.field_awesome_tshirt_order__amount
@@ -51,7 +51,7 @@ msgstr "Commandes Awesome T-shirt"
 #: code:addons/awesome_tshirt/static/src/js/home_menu.js:15
 #, python-format
 msgid "Bafien Ckinpaers is watching you!"
-msgstr "'Tention gamin, Bafien Ckinpaers te surveille !"
+msgstr "Bafien Ckinpaers te surveille !"
 
 #. module: awesome_tshirt
 #: selection:awesome_tshirt.order,state:0

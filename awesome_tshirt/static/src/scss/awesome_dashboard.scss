@@ -22,3 +22,13 @@ $font-size: 14px;
         display: inline-block;
     }
 }
+
+.o_custom_message {
+    padding: 0.2em 1em;
+    font-size: 2em;
+
+    border-radius: 4px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.33);
+
+    cursor: not-allowed;
+}

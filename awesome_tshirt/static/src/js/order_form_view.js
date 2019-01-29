@@ -66,7 +66,7 @@ var OrderFormController = FormController.extend({
             }
             else {
                 self.do_warn(
-                    _t("Error append"),
+                    _t("Error happened"),
                     _t("Something wrong with the printer. Check it and retry.")
                 );
             }
