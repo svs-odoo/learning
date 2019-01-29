@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <li t-name="QuickOrderNavigation" class="o_quick_order_nav_item">
+        <input type="number" class="o_input" placeholder="Order's ID"/>
+    </li>
+</templates>

@@ -31,14 +31,16 @@ var OrderFormController = FormController.extend({
     _updateButtons: function () {
         this._super.apply(this, arguments);
 
-        var disabled = this.mode === 'edit';
-        var data = this.model.get(this.handle, {raw: true}).data;
-        var printed = data.state === 'printed' && data.customer_id;
+        if (this.$buttons) {
+            var disabled = this.mode === 'edit';
+            var data = this.model.get(this.handle, {raw: true}).data;
+            var printed = data.state === 'printed' && data.customer_id;
 
-        var printButton = this.$buttons.find('.o_print_label');
-        printButton.toggleClass('btn-primary', printed)
-            .toggleClass('btn-secondary', !printed)
-            .attr('disabled', !!disabled);
+            var printButton = this.$buttons.find('.o_print_label');
+            printButton.toggleClass('btn-primary', printed)
+                .toggleClass('btn-secondary', !printed)
+                .attr('disabled', !!disabled);
+        }
     },
 
     // -------------------------------------------------------------------------
@@ -57,10 +59,16 @@ var OrderFormController = FormController.extend({
         this.printing = true;
         var always = function (printResolved) {
             if (printResolved) {
-                self.do_notify(_t("Label printed !"), _t("Your label was correctly printed."));
+                self.do_notify(
+                    _t("Label printed !"),
+                    _t("Your label was correctly printed.")
+                );
             }
             else {
-                self.do_warn(_t("Error append"), _t("Something wrong with the printer. Check it and retry."));
+                self.do_warn(
+                    _t("Error append"),
+                    _t("Something wrong with the printer. Check it and retry.")
+                );
             }
             self.printing = false;
         };
