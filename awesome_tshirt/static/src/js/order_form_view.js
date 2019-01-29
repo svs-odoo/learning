@@ -7,6 +7,7 @@ var FormView = require('web.FormView');
 var viewRegistry = require('web.view_registry');
 
 var qweb = core.qweb;
+var _t = core._t;
 
 
 var OrderFormController = FormController.extend({
@@ -54,7 +55,13 @@ var OrderFormController = FormController.extend({
 
         var self = this;
         this.printing = true;
-        var always = function () {
+        var always = function (printResolved) {
+            if (printResolved) {
+                self.do_notify(_t("Label printed !"), _t("Your label was correctly printed."));
+            }
+            else {
+                self.do_warn(_t("Error append"), _t("Something wrong with the printer. Check it and retry."));
+            }
             self.printing = false;
         };
 
