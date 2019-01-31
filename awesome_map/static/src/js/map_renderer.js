@@ -3,7 +3,20 @@ odoo.define('awesome_map.MapRenderer', function (require) {
 
 var AbstractRenderer = require('web.AbstractRenderer');
 
-var MapRenderer = AbstractRenderer.extend({});
+var MapRenderer = AbstractRenderer.extend({
+
+    // -------------------------------------------------------------------------
+    // Private
+    // -------------------------------------------------------------------------
+
+    /**
+     * @override
+     */
+    _render: function () {
+        this.$el.text("Hello World");
+        return this._super.apply(this, arguments);
+    },
+});
 
 return MapRenderer;
 
