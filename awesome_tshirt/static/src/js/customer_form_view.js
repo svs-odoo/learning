@@ -26,7 +26,7 @@ var CustomerFormController = FormController.extend({
 
             this._rpc({
                 model: 'res.partner',
-                method: 'geo_localize',
+                method: 'random_geo_localize',
                 args: [res_id]
             }).then(function () {
                 self.reload();
