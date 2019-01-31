@@ -1,0 +1,30 @@
+.o_order_kanban_view{
+    .o_customer_sidebar {
+        padding: 4px;
+        min-width: 150px;
+        border-right: 1px solid $gray-400;
+
+        .o_customer_search {
+            width: 100%;
+            margin-bottom: 8px;
+            padding: 0 4px;
+        }
+
+        & > table {
+            width: 100%;
+        }
+
+        .o_customer {
+            border: 1px solid $gray-400;
+            cursor: pointer;
+
+            & > td {
+                padding: 4px 8px;
+            }
+
+            &.o_active {
+                background: lightgray;
+            }
+        }
+    }
+}

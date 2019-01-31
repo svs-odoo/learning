@@ -30,7 +30,7 @@ var CustomerFormController = FormController.extend({
                 args: [res_id]
             }).then(function () {
                 self.reload();
-                this.rpc = false;
+                self.rpc = false;
             });
         }
     },
