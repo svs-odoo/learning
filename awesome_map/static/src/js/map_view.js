@@ -20,6 +20,12 @@ var MapView = AbstractView.extend({
         Renderer: MapRenderer,
     },
     display_name: _lt('Map'),
+
+    init: function () {
+        this._super.apply(this, arguments);
+        this.loadParams.latitude = this.arch.attrs.latitude;
+        this.loadParams.longitude = this.arch.attrs.longitude;
+    },
 });
 
 viewRegistry.add('map', MapView);
